@@ -1,0 +1,261 @@
+import os,random,math
+
+#    annotation  \  примечание
+#------------------------------------------------------------------------------
+#    custom_var       --- основная переменная для ответов пользователя 
+#    main_menu_var    --- переменная для действий в главном меню 
+#    sets_menu_var    --- переменная для действий в меню настроек
+#    creator_menu_var    --- переменная для действий в меню просмотра создателей
+#    lang_menu_var    --- переменная для действий в меню смены языка
+#    start_menu_var    --- переменная для действий в меню пролога игры
+# 
+#    lang_var         --- переменная для смены языка
+#
+#
+# 
+# 
+# 
+# 
+# 
+#    eng    ---   переменная для смены языка на англиский
+#    rus    ---   переменная для смены языка на русский
+#    q   ---   переменная для входа в меню настроек
+#    c   ---   переменная для входа в меню просмотра создателей
+#    e   ---   переменная для конца игры
+#    s   ---   переменная для пролога игры
+#    l   ---   переменная для входа в меню смены языка
+#    b   ---   переменная возврата не предыдущий экран 
+
+
+
+
+
+
+
+
+
+#-------------------------------------------------------------------------------
+#      Стартовые экраны 
+#      №1
+eng_translate = ('''  
+
+                    | Hope Less |
+                  | Into The Dark |
+
+
+                      * Start *
+                    ( press   s )
+
+                      Settings
+                    ( press q )
+
+                      _Exit_
+                    ( press e )
+
+''')
+#      №2
+rus_translate = ('''  
+
+                    | Hope Less |
+                  | Into The Dark |
+
+
+                     * Начать *
+                    ( нажми    s )
+
+                     Настройки
+                    ( нажми  q )
+
+                      _Выход_
+                    ( нажми  e )
+
+''')
+#      №3
+eng_sets_menu = (''' 
+
+                     *Language*  
+                     ( press l )
+    
+                       Creator
+                     ( press c )
+
+                        Back
+                     ( press b )
+    ''')
+#      №4
+rus_sets_menu = (''' 
+
+                       *Язык*  
+                     ( нажми l )
+    
+                      Создатели
+                     ( нажми c )
+
+                        Назад
+                     ( нажми b )
+    ''')
+#      №5
+eng_lang_menu = (''' 
+                      *Language*  
+                 
+             English               Russian
+          ( print eng )         ( print rus )
+
+
+                         Back
+                      ( press b )
+    ''')
+#      №6
+rus_lang_menu = (''' 
+                        *Язык*  
+                 
+            Англиский               Русский
+          ( напиши eng )         ( напиши rus )
+
+
+                         Назад
+                      ( нажми b )
+    ''')
+#      №7
+eng_tran_creator = ('''
+                      *Creators*  
+                     
+    
+                       N.F.Lol
+                 With the support of
+                  Visual Studio Code
+
+
+                        Back
+                     ( press b )
+    ''')
+#      №8
+rus_tran_creator = ('''
+                     *Создатели*  
+                     
+    
+                       N.F.Lol
+                    При поддержке
+                  Visual Studio Code
+
+
+                        Назад
+                     ( нажми b )
+    ''')
+
+
+
+lang_var = 'rus'
+
+
+
+
+#------- Главное меню -------------------------------------------------------------
+def main_menu():
+    os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли
+    if lang_var == 'rus':
+         print(rus_translate)
+    if lang_var == 'eng':
+         print(eng_translate)
+    
+    main_menu_var = input('---')
+
+    if main_menu_var == "s":
+        start()
+
+    if main_menu_var == "q":
+        set_things()
+
+    if main_menu_var == "e":
+        os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли  
+#----------------------------------------------------------------------------------
+#------- Меню настроек ------------------------------------------------------------
+def set_things():
+    os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли
+
+    if lang_var == 'rus':
+         print(rus_sets_menu)
+    if lang_var == 'eng':
+         print(eng_sets_menu)
+
+    sets_menu_var = input('---')
+
+
+    if sets_menu_var == "l":
+        lang_menu() 
+
+    if sets_menu_var == "c":
+        creators() 
+
+    if sets_menu_var == "b":
+        os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли 
+        main_menu()
+
+#-----------------------------------------------------------------------------------
+#--------Меню смены языка-----------------------------------------------------------
+def lang_menu():
+    os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли 
+ 
+    print(rus_lang_menu)
+
+    lang_menu_var = input('смена языка "напиши lang"')
+    if lang_menu_var == 'lang':
+        lang_var = input('---')
+        if lang_var == ('rus'):
+            lang_var = 'rus'
+            os.system('cls' if os.name == 'nt' else 'clear') 
+            print(rus_lang_menu)
+            lang_menu_var = input('смена языка "напиши lang"')
+        else :
+            lang_var = 'eng'
+            os.system('cls' if os.name == 'nt' else 'clear') 
+            print(eng_lang_menu)
+            lang_menu_var = input('смена языка "напиши lang"')
+    if lang_menu_var == 'b':
+        set_things()
+
+
+#-----------------------------------------------------------------------------------
+#---------Список создателей---------------------------------------------------------
+def creators():
+    os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли 
+  
+
+
+    if lang_var == 'rus':
+         print(rus_tran_creator)
+    if lang_var == 'eng':
+         print(eng_tran_creator)
+
+
+    creator_menu_var = input('---')
+    if  creator_menu_var == 'b':
+      set_things()
+
+
+#-----------------------------------------------------------------------------------
+#----------Пролог игры--------------------------------------------------------------
+def start():
+  os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли
+  start_menu_var = input('Хотите прочитать историю персонажа ? ( y / n )')
+  if start_menu_var == ('y'):
+    os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли
+    print('''  
+    Вы выживший , один из немногих кому удалось остаться в живых .
+    Все изменлось и мир уже не такой как в прежде . Он полон опасностей .
+    Из-за третей мировой и смены климатических условий кругом воцарились хаос и разруха  
+    В последствии большого колличества радиации и мутагенов из разрушенных лабораторий множество животных 
+    а также растений изменились и теперь предсталяют большую угрозу для человечества.
+    И теперь тебе предстоит выжить и восстановить цевилизацию вместе с такими как ты людьми :
+    одинокими , потеренными во тьме разрухи , потерявшими надежду...
+        ''')
+  if start_menu_var == ('n'): 
+    os.system('cls' if os.name == 'nt' else 'clear')    # очистка консоли
+
+
+
+
+#-----------------------------------------------------------------------------------
+#---------Основа игры---------------------------------------------------------------
+
+main_menu()   
